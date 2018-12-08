@@ -90,7 +90,8 @@ class SerializedDetailView(View):
 class SerializedListView(View):
     def get(self, request, *args, **kwargs): 
         qs = Update.objects.all()
-        data = serialize("json", qs, fields=('user', 'content'))
-        print(data)
-        json_data = data
+        # data = serialize("json", qs, fields=('user', 'content'))
+        # print(data)
+        # json_data = data
+        json_data = Update.objects.all().serialize()
         return HttpResponse(json_data, content_type='application/json')
