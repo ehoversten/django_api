@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from updates.views import update_model_detail_view
+from updates.views import json_example_view, json_example_html_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', update_model_detail_view, name='home')
+    url(r'^$', json_example_view, name='json'),
+    url(r'^json/', json_example_html_view, name='html'),
 ]
