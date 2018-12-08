@@ -2,8 +2,7 @@ import json
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View
-
-
+from djangoapi.mixins import JsonResponseMixin
 
 # Create your views here.
 
@@ -32,10 +31,18 @@ def json_example_html_view(request):
 
 class JsonCBV(View):
     def get(self, request, *args, **kwargs): 
-        ''' URI - for REST API '''
         data = {
             "count" : 100,
             "content" : "Some Class Based View content",
         }
         json_data = json.dumps(data)
         return HttpResponse(json_data, content_type='application/json')
+
+
+class JsonCBVmix(JsonResponseMixin, View):
+    def get(self, request, *args, **kwargs): 
+        data = {
+            "count" : 100,
+            "content" : "Some Class Based Mixin View content",
+        }
+        return self.render_to_json_response(data)
