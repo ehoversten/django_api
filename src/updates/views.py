@@ -1,6 +1,9 @@
 import json
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
+from django.views.generic import View
+
+
 
 # Create your views here.
 
@@ -26,3 +29,13 @@ def json_example_html_view(request):
     }
     json_data = json.dumps(data)
     return HttpResponse(json_data, content_type='application/json')
+
+class JsonCBV(View):
+    def get(self, request, *args, **kwargs): 
+        ''' URI - for REST API '''
+        data = {
+            "count" : 100,
+            "content" : "Some Class Based View content",
+        }
+        json_data = json.dumps(data)
+        return HttpResponse(json_data, content_type='application/json')
